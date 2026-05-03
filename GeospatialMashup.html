@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Wonosobo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        // --- Inisialisasi Peta ---
+        var mymap = L.map('map').setView([-7.353744, 109.982943], 12);
+        // --- Basemap OpenStreetMap ---
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+                'OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+        // --- Marker (Objek Titik) ---
+        var marker = L.marker([-7.385255, 110.072543]).addTo(mymap);
+        marker.bindPopup('<b>Gunung Sumbing</b><br>Puncak dari Gunung Sumbing.');
+        
+        var marker = L.marker([-7.302784, 109.995053]).addTo(mymap);
+        marker.bindPopup('<b>Gunung Sindoro</b><br>Puncak dari Gunung Sindoro.');
+
+        // --- Circle (Objek Lingkaran) ---
+        var circle = L.circle([-7.385255, 110.072543], {
+            color: '#FF1493', fillColor: '#FFC0CB',
+            fillOpacity: 0.5, radius: 4500
+        }).addTo(mymap);
+        circle.bindPopup('Radius 4500 m dari titik Puncak Gunung Sumbing. Termasuk daerah lereng tengah-atas Gunung Sumbing.');
+
+        var circle = L.circle([-7.302784, 109.995053], {
+            color: '#FF1493', fillColor: '#FFC0CB',
+            fillOpacity: 0.5, radius: 5000
+        }).addTo(mymap);
+        circle.bindPopup('Radius 5000 m dari titik Puncak Gunung Sindoro. Termasuk daerah lereng tengah-atas Gunung Sindoro.');
+
+        // --- Polygon (Objek Area) ---
+        var polygon = L.polygon([
+            [-7.309131, 109.903447], [-7.309941, 109.923044],
+            [-7.387598, 109.908780], [-7.383626, 109.882440]
+        ], { color: '#2E8B58', fillColor: '#00FF7F', fillOpacity: 0.3 })
+            .addTo(mymap);
+        polygon.bindPopup('Kota Wonosobo');
+
+        // --- Polyline (Objek Garis) ---
+        var polyline = L.polyline([
+            [-7.352621, 110.005688], [-7.361225, 109.987621],
+            [-7.367603, 109.982518], [-7.389127, 109.963739], 
+            [-7.372370, 109.938191], [-7.360473, 109.909111], 
+            [-7.363915, 109.901966], [-7.417564, 109.883891]
+        ], { color: '#FF0000', weight: 3, opacity: 0.8 })
+            .addTo(mymap);
+        polyline.bindPopup('Jalan Utama di Wonosobo');
+    </script>
+</body>
+
+</html>
